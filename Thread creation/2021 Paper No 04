@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+#define Num_Threds 2
+
+void * thread1()
+{       
+  int i = 1 ;
+  while(i<11){
+    int squarenum = i * i ;
+    printf("square number %d is  : %d \n ",i,squarenum);
+    i++;
+  }
+  printf("Hello World!!\n");   
+}
+
+void * thread2()
+{
+  int x = 1;
+  while(x<5){
+    int cubicnum = x*x*x ;
+    printf("cubic number %d is  : %d \n",x,cubicnum);
+    x++;
+  }
+}
+
+int main()
+{
+  pthread_t tid1;
+  pthread_t tid2;
+     
+  pthread_create(&tid1,NULL,thread1,NULL);
+  pthread_join(tid1,NULL);
+
+  printf("\nWaiting for thread 1 to finish \n");
+       
+  pthread_create(&tid2,NULL,thread2,NULL);
+  pthread_join(tid2,NULL);
+        
+}

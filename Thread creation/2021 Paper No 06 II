@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+
+void * thread1()
+{
+	int i = 1;
+	while (i * (i + 1) / 2 <= 10) {
+		printf("Triangular number %d : %d\n", i, i * (i + 1) / 2);
+		i++;
+	}
+}
+
+int main()
+{
+	pthread_t tid1;
+	pthread_create(&tid1, NULL, thread1, NULL);
+	pthread_join(tid1, NULL);
+	
+	int i = 1;
+  int n;
+	printf("Enter the range of the number : ");
+  scanf("%d",&n);
+
+	while ((i * i) < n) {
+		printf("Cubic number %d : %d\n", i, i * i);
+		i++;
+	}
+	
+	return 0;
+}

@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+#define Num_Threads 2
+
+void * thread1()
+{
+  int i = 1;
+  while(i<11){
+    int squarenum = i*i;
+    printf("Square numbers %d : %d \n ",i,squarenum);
+    i++;
+  }
+
+  printf("Hello World!!\n");   
+}
+
+int main()
+{
+  pthread_t tid1[Num_Threads];
+  for(int x = 0 ;x<Num_Threads;x++){
+    pthread_create(&tid1[x],NULL,thread1,NULL);
+  }
+        
+  for(int x = 0 ;x<Num_Threads;x++){
+    pthread_join(tid1[x],NULL);
+  }
+
+  int n ,i = 1;
+  printf("Enter the range of the number : ");
+  scanf("%d",&n);
+
+  while(i <= n){
+    printf("cubic numbers : %d \n", i*i*i);
+    i++ ;
+  }
+
+  return 0;
+}

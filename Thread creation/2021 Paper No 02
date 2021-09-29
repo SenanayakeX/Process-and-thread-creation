@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+#define Num_threds 2
+
+void * thread1()
+{
+  int num = 2 ;
+  while (num < 101){
+    printf ("Even numbers : %d \n",num);
+    num = num + 2 ;
+  }
+
+  printf("Hello World!!\n");   
+        
+}
+
+int main()
+{
+  pthread_t tid1[Num_threds];
+
+  for(int x = 0; x < Num_threds; x++){
+    pthread_create(&tid1[x],NULL,thread1,NULL);
+    
+  }
+
+  for(int x = 0; x < Num_threds; x++){
+    pthread_join(tid1[x],NULL);
+  }
+
+  int i = 0, n;
+  printf("Enter value for n : ");
+  scanf("%d", &n);
+
+  while(i <= n){
+    printf("Number : %d\n", i);
+    i++;
+  }
+        
+}
